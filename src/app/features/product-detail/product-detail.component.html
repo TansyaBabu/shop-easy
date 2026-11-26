@@ -1,0 +1,55 @@
+<p><a routerLink="/products">← Back to products</a></p>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="state">Loading product…</p>
+  }
+  @case ('notfound') {
+    <div class="state">
+      <h1>Product not found</h1>
+      <p>We couldn't find a product with that id.</p>
+      <a class="btn" routerLink="/products">Back to products</a>
+    </div>
+  }
+  @case ('error') {
+    <div class="state state-error">
+      <p>Could not load this product.</p>
+      <a class="btn" routerLink="/products">Back to products</a>
+    </div>
+  }
+  @default {
+    @if (product(); as p) {
+      <article class="panel detail">
+        <div class="gallery">
+          @if (selectedImage(); as img) {
+            <img class="main-image" [src]="img" [alt]="p.title" />
+          }
+          <div class="row">
+            @for (img of p.images; track img) {
+              <button type="button" class="thumb-btn" (click)="selectedImage.set(img)">
+                <img [src]="img" alt="" width="56" height="56" />
+              </button>
+            }
+          </div>
+        </div>
+
+        <div>
+          <h1>{{ p.title }}</h1>
+          <p>{{ p.description }}</p>
+          <dl>
+            <dt>Price</dt>
+            <dd>{{ p.price | currency }}</dd>
+            <dt>Rating</dt>
+            <dd>★ {{ p.rating | number: '1.1-1' }}</dd>
+            <dt>Stock</dt>
+            <dd>{{ p.stock }}</dd>
+            <dt>Brand</dt>
+            <dd>{{ p.brand ?? '—' }}</dd>
+            <dt>Category</dt>
+            <dd>{{ p.category }}</dd>
+          </dl>
+        </div>
+      </article>
+    }
+  }
+}
