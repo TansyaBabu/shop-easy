@@ -1,0 +1,26 @@
+@if (loading.active()) {
+  <div class="loading-bar" role="progressbar" aria-label="Loading"></div>
+}
+
+<header class="topbar">
+  <a routerLink="/products" class="brand">🛒 ShopEasy</a>
+  <span class="spacer"></span>
+  <button type="button" class="btn btn-ghost" (click)="triggerServerError()">Test 500</button>
+  @if (auth.isLoggedIn()) {
+    @if (auth.user(); as user) {
+      <span class="who">{{ user.firstName }} {{ user.lastName }}</span>
+    }
+    <button type="button" class="btn" (click)="auth.logout()">Logout</button>
+  }
+</header>
+
+@if (notify.message(); as message) {
+  <div class="toast" [class.toast-error]="message.kind === 'error'" role="status">
+    <span>{{ message.text }}</span>
+    <button type="button" class="toast-close" (click)="notify.dismiss()" aria-label="Dismiss">×</button>
+  </div>
+}
+
+<main class="container">
+  <router-outlet />
+</main>

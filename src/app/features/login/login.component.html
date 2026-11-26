@@ -1,0 +1,31 @@
+<section class="panel narrow">
+  <h1>Log in</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <label>
+      Username
+      <input formControlName="username" autocomplete="username" />
+    </label>
+    @if (form.controls.username.touched && form.controls.username.hasError('required')) {
+      <small class="error">Username is required</small>
+    }
+
+    <label>
+      Password
+      <input type="password" formControlName="password" autocomplete="current-password" />
+    </label>
+    @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+      <small class="error">Password is required</small>
+    }
+
+    <button type="submit" class="btn btn-primary" [disabled]="loading()">
+      {{ loading() ? 'Logging in…' : 'Log in' }}
+    </button>
+
+    @if (error(); as message) {
+      <p class="error" role="alert">{{ message }}</p>
+    }
+  </form>
+
+  <p class="hint">Test login: <code>emilys</code> / <code>emilyspass</code></p>
+</section>
