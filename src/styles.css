@@ -1,0 +1,114 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #fff;
+  --text: #1c2430;
+  --muted: #6b7686;
+  --line: #dde2e9;
+  --primary: #2563eb;
+  --danger: #c62828;
+  --ok: #1b7f3b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 { font-size: 1.5rem; margin: 0 0 1rem; }
+h2 { font-size: 1.15rem; margin: 0 0 .75rem; }
+a { color: var(--primary); }
+code { background: #eef1f5; padding: 1px 5px; border-radius: 4px; }
+
+.topbar {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .6rem 1.25rem; background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 700; text-decoration: none; color: var(--text); }
+.spacer { flex: 1; }
+.who { color: var(--muted); }
+
+.container { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+
+.loading-bar {
+  position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 20;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  background-size: 40% 100%; background-repeat: no-repeat;
+  animation: slide 1s linear infinite;
+}
+@keyframes slide { from { background-position: -40% 0; } to { background-position: 140% 0; } }
+
+.toast {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  max-width: 960px; margin: .75rem auto 0; padding: .6rem 1rem;
+  border-radius: 6px; background: #e6f4ea; color: var(--ok); border: 1px solid #b7dfc2;
+}
+.toast-error { background: #fdecea; color: var(--danger); border-color: #f5c2bd; }
+.toast-close { border: 0; background: none; font-size: 1.2rem; cursor: pointer; color: inherit; }
+
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 1.25rem; margin-bottom: 1rem;
+}
+.panel.narrow { max-width: 380px; margin: 3rem auto; }
+.panel label { display: block; margin: .75rem 0 .25rem; font-size: .9rem; }
+.panel form { display: block; }
+.confirm { border-color: #f5c2bd; }
+
+input, select, textarea {
+  width: 100%; padding: .5rem .6rem; font: inherit;
+  border: 1px solid var(--line); border-radius: 6px; background: #fff;
+}
+.toolbar { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.toolbar input { flex: 1; min-width: 180px; }
+.toolbar select { width: auto; min-width: 180px; }
+
+.btn {
+  display: inline-block; padding: .45rem .9rem; font: inherit; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--surface);
+  color: var(--text); text-decoration: none;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.btn-danger { color: var(--danger); border-color: #f0b7b2; }
+.btn-ghost { border-style: dashed; color: var(--muted); }
+.panel .btn-primary { margin-top: 1rem; }
+
+.row { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+
+.error { color: var(--danger); font-size: .85rem; margin: .25rem 0 0; display: block; }
+.hint { color: var(--muted); font-size: .85rem; }
+
+.state { text-align: center; padding: 2.5rem 1rem; color: var(--muted); }
+.state-error { color: var(--danger); }
+
+.grid {
+  list-style: none; margin: 0 0 1rem; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem;
+}
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: .9rem; display: flex; flex-direction: column; gap: .5rem; align-items: center; text-align: center;
+}
+.card img { object-fit: contain; }
+.card-title { font-weight: 600; text-decoration: none; }
+.meta { display: flex; gap: .75rem; color: var(--muted); }
+.meta strong { color: var(--text); }
+.thumb-empty {
+  width: 120px; height: 120px; display: grid; place-items: center;
+  background: #eef1f5; color: var(--muted); border-radius: 6px; font-size: .85rem;
+}
+
+.pager { display: flex; justify-content: center; align-items: center; gap: 1rem; margin: 1rem 0; }
+
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1.5rem; }
+.main-image { width: 100%; max-height: 320px; object-fit: contain; background: #fff; }
+.thumb-btn { border: 1px solid var(--line); background: #fff; padding: 2px; border-radius: 4px; cursor: pointer; }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1rem; margin: 0; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+
+@media (max-width: 640px) { .detail { grid-template-columns: 1fr; } }
